@@ -83,8 +83,11 @@ async function main(): Promise<void> {
   console.log(`verify-seed: checking ${registry.entries.length} entries\n`);
 
   if (registry.entries.length === 0) {
-    console.error('no entries in registry — nothing to verify');
-    process.exit(1);
+    console.log(
+      'seed.json is empty — discovery now federates live via 402directory.com ' +
+        'and other indexes (see Federation.fromEnv). Nothing to verify; exiting OK.',
+    );
+    process.exit(0);
   }
 
   let passed = 0;

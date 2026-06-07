@@ -50,7 +50,13 @@ export type RegistryEntry = {
    * federated entries. Surfaced in `x402.discover` results so the agent
    * (and the user) can weigh trust accordingly.
    */
-  source?: 'verified' | 'candidate' | 'cdp-bazaar' | 'agentic-market' | 'x402watch';
+  source?:
+    | 'verified'
+    | 'candidate'
+    | 'cdp-bazaar'
+    | 'agentic-market'
+    | 'x402watch'
+    | '402directory';
 };
 
 export type RegistryFile = {

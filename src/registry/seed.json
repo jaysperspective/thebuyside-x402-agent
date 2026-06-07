@@ -1,54 +1,5 @@
 {
   "version": 1,
-  "_note": "Curated registry of x402-priced APIs verified to return a valid 402 challenge with the advertised price on Base mainnet. CI runs verify-seed nightly to flag broken entries. To add an entry, see docs/adding-an-api.md and submit a PR. Testnet (Base Sepolia) entries live in seed.candidates.json until a Sepolia chain adapter ships.",
-  "entries": [
-    {
-      "id": "newsep-stories-search",
-      "name": "Executive Producer — local US news search",
-      "description": "Search local news from US metro markets (DC, Houston, Dallas, etc.) by market, query, or category. Returns curated, deduped, scored stories with hard-fact extraction.",
-      "endpoint": "https://news-ep.com/api/v1/stories",
-      "method": "GET",
-      "price_usdc": 0.005,
-      "price_atomic": 5000,
-      "chain": "base",
-      "network": "eip155:8453",
-      "category": "news",
-      "tags": ["news", "local", "us", "houston", "dallas", "dc", "search", "headlines", "metro"],
-      "example": "https://news-ep.com/api/v1/stories?market=houston&limit=5",
-      "verified": true,
-      "verified_at": "2026-05-10"
-    },
-    {
-      "id": "newsep-story-detail",
-      "name": "Executive Producer — single story detail",
-      "description": "Fetch one story by ID with full hard-facts, sources, score, and metadata.",
-      "endpoint": "https://news-ep.com/api/v1/stories/{id}",
-      "method": "GET",
-      "price_usdc": 0.001,
-      "price_atomic": 1000,
-      "chain": "base",
-      "network": "eip155:8453",
-      "category": "news",
-      "tags": ["news", "story", "detail", "article"],
-      "example": "https://news-ep.com/api/v1/stories/78042",
-      "verified": true,
-      "verified_at": "2026-05-10"
-    },
-    {
-      "id": "x402index-list-all",
-      "name": "x402 Index — list all registered products",
-      "description": "Directory of x402 protocol-implementing products that sellers have submitted to the x402 Index. Useful as a meta-discovery source — the registry of registries.",
-      "endpoint": "https://www.x402index.com/api/all",
-      "method": "GET",
-      "price_usdc": 0.01,
-      "price_atomic": 10000,
-      "chain": "base",
-      "network": "base",
-      "category": "directory",
-      "tags": ["directory", "registry", "discovery", "x402", "list", "marketplace", "agents"],
-      "example": "https://www.x402index.com/api/all",
-      "verified": true,
-      "verified_at": "2026-05-10"
-    }
-  ]
+  "_note": "Curated seed registry of x402-priced APIs verified to return a valid 402 challenge on Base mainnet. CI runs verify-seed nightly to flag broken entries. Discovery in pay.discover federates this seed with external indexes (CDP Bazaar, agentic.market, x402watch, 402directory.com); the directory has been the de facto live source since the v0.5 cleanup of stale seeds. Add curated entries here only if they need to be available with X402_FEDERATION=off. To submit a community entry, list at https://402directory.com/submit instead.",
+  "entries": []
 }

@@ -178,9 +178,11 @@ describe('Federation.fromEnv', () => {
     'X402_BAZAAR_URL',
     'X402_AGENTIC_URL',
     'X402_X402WATCH_URL',
+    'X402_DIRECTORY_URL',
     'X402_DISABLE_BAZAAR',
     'X402_DISABLE_AGENTIC',
     'X402_DISABLE_X402WATCH',
+    'X402_DISABLE_402DIRECTORY',
   ];
   let saved: Record<string, string | undefined> = {};
 
@@ -195,10 +197,11 @@ describe('Federation.fromEnv', () => {
     }
   });
 
-  it('defaults to enabled with all three sources', () => {
+  it('defaults to enabled with all four sources', () => {
     const fed = Federation.fromEnv();
     expect(fed.config.enabled).toBe(true);
     expect(fed.config.sources.map((s) => s.id).sort()).toEqual([
+      '402directory',
       'agentic-market',
       'cdp-bazaar',
       'x402watch',
@@ -213,6 +216,7 @@ describe('Federation.fromEnv', () => {
   it('honors per-source disable env vars', () => {
     process.env.X402_DISABLE_BAZAAR = '1';
     process.env.X402_DISABLE_AGENTIC = '1';
+    process.env.X402_DISABLE_402DIRECTORY = '1';
     const ids = Federation.fromEnv().config.sources.map((s) => s.id);
     expect(ids).toEqual(['x402watch']);
   });

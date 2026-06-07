@@ -137,10 +137,11 @@ describe('Registry', () => {
   });
 
   describe('default seed.json', () => {
-    it('loads the bundled seed.json with at least one entry', async () => {
+    it('loads the bundled seed.json (may be empty — discovery federates live)', async () => {
       const r = await Registry.load();
-      expect(r.entries.length).toBeGreaterThanOrEqual(1);
-      expect(r.hosts()).toContain('news-ep.com');
+      // Seed is intentionally empty post-v0.5 cleanup; live discovery comes from
+      // 402directory.com + other federation sources. Just assert the file loads.
+      expect(Array.isArray(r.entries)).toBe(true);
     });
   });
 });

@@ -63,11 +63,21 @@ describe('CapPolicy', () => {
 
   it('honors custom config', async () => {
     const tight = new CapPolicy(
-      { perCallLimitAtomic: 1000n, dailyLimitAtomic: 2000n },
+      { perCallLimitAtomic: 1000n, dailyLimitAtomic: 2000n, killSwitch: false },
       receipts,
     );
     expect((await tight.check(500n)).ok).toBe(true);
     expect((await tight.check(1500n)).ok).toBe(false); // over per-call
+  });
+
+  it('killSwitch refuses everything regardless of amount', async () => {
+    const off = new CapPolicy(
+      { perCallLimitAtomic: 1_000_000n, dailyLimitAtomic: 10_000_000n, killSwitch: true },
+      receipts,
+    );
+    const d = await off.check(1n);
+    expect(d.ok).toBe(false);
+    if (!d.ok) expect(d.reason).toMatch(/KILL_SWITCH/);
   });
 
   it('reports spent total even when within budget', async () => {

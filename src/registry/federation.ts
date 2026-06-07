@@ -23,7 +23,11 @@ import { gunzipSync } from 'node:zlib';
 import { logger } from '../log.js';
 import type { RegistryEntry } from './types.js';
 
-export type ExternalSourceId = 'cdp-bazaar' | 'agentic-market' | 'x402watch';
+export type ExternalSourceId =
+  | 'cdp-bazaar'
+  | 'agentic-market'
+  | 'x402watch'
+  | '402directory';
 
 export type FetchContext = {
   signal: AbortSignal;
@@ -63,6 +67,10 @@ export class Federation {
     if (process.env.X402_DISABLE_X402WATCH !== '1') {
       const url = process.env.X402_X402WATCH_URL ?? DEFAULT_X402WATCH_URL;
       if (url) sources.push(makeX402WatchSource(url));
+    }
+    if (process.env.X402_DISABLE_402DIRECTORY !== '1') {
+      const url = process.env.X402_DIRECTORY_URL ?? DEFAULT_402DIRECTORY_URL;
+      if (url) sources.push(make402DirectorySource(url));
     }
 
     return new Federation({ enabled, timeoutMs, sources });
@@ -133,6 +141,7 @@ const DEFAULT_AGENTIC_URL = 'https://api.agentic.market/v1/services/search';
  */
 const DEFAULT_X402WATCH_URL =
   'https://raw.githubusercontent.com/printmoneylab/x402watch-data/main/data/services-{date}.json.gz';
+const DEFAULT_402DIRECTORY_URL = 'https://402directory.com/api/directory';
 
 /**
  * CDP Bazaar — Coinbase's semantic-search index. Verified shape (2026-05-10):
@@ -452,4 +461,54 @@ function matchesQuery(entry: RegistryEntry, query: string): boolean {
     entry.category
   ).toLowerCase();
   return terms.some((t) => haystack.includes(t));
+}
+
+/**
+ * 402directory.com — jaypay's curated + community-submitted registry. Returns
+ * `{ entries: [{ id, name, description, endpoint, method, price_usdc, chain,
+ * protocol, category, tags, example, verified, source, badges? }] }`.
+ * Server-side filtering not yet implemented, so we filter client-side using
+ * matchesQuery (same as x402watch).
+ */
+export function make402DirectorySource(baseUrl: string): ExternalSource {
+  return {
+    id: '402directory',
+    name: '402directory.com',
+    async fetch(query, { signal, fetchFn }) {
+      const r = await fetchFn(baseUrl, { signal });
+      if (!r.ok) return [];
+      const json = await r.json().catch(() => null);
+      const list = (json as { entries?: unknown[] } | null)?.entries;
+      if (!Array.isArray(list)) return [];
+      const entries = list.flatMap((raw) => directoryRowToEntry(raw));
+      return entries.filter((e) => matchesQuery(e, query));
+    },
+  };
+}
+
+function directoryRowToEntry(raw: unknown): RegistryEntry[] {
+  const e = (raw ?? {}) as Record<string, unknown>;
+  const endpoint = typeof e.endpoint === 'string' ? e.endpoint : null;
+  if (!endpoint) return [];
+  const price = typeof e.price_usdc === 'number' ? e.price_usdc : Number(e.price_usdc ?? 0);
+  const chain = typeof e.chain === 'string' ? e.chain : 'base';
+  return [
+    {
+      id: typeof e.id === 'string' ? e.id : `402dir-${stableId(endpoint)}`,
+      name: typeof e.name === 'string' ? e.name : endpoint,
+      description: typeof e.description === 'string' ? e.description : '',
+      endpoint,
+      method: e.method === 'POST' ? 'POST' : 'GET',
+      price_usdc: Number.isFinite(price) ? price : 0,
+      price_atomic: Number.isFinite(price) ? Math.round(price * 1_000_000) : 0,
+      chain: shortChain(chain),
+      network: chain === 'solana' ? 'solana' : 'eip155:8453',
+      category: typeof e.category === 'string' ? e.category : 'general',
+      tags: Array.isArray(e.tags) ? (e.tags as string[]) : [],
+      example: typeof e.example === 'string' ? e.example : '',
+      protocol: typeof e.protocol === 'string' ? (e.protocol as RegistryEntry['protocol']) : 'x402',
+      verified: e.verified === true,
+      verified_at: '',
+    },
+  ];
 }

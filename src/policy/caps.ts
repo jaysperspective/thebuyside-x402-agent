@@ -5,6 +5,7 @@
  * conservative for v0 ("safe out-of-the-box"). Override via env:
  *   X402_PER_CALL_LIMIT=0.05      (USDC, decimal) or 50000 (atomic units)
  *   X402_DAILY_LIMIT=1.00          ditto
+ *   X402_KILL_SWITCH=1             refuse ALL payments regardless of caps
  */
 
 import { formatUsdcAtomic, parseUsdcLimit } from './format.js';
@@ -13,11 +14,13 @@ import type { Receipts } from './receipts.js';
 export type CapConfig = {
   perCallLimitAtomic: bigint;
   dailyLimitAtomic: bigint;
+  killSwitch: boolean;
 };
 
 export const DEFAULT_CAPS: CapConfig = {
   perCallLimitAtomic: 50_000n, // $0.05
   dailyLimitAtomic: 1_000_000n, // $1.00
+  killSwitch: false,
 };
 
 export type CapDecision =
@@ -39,6 +42,7 @@ export class CapPolicy {
         dailyLimitAtomic: process.env.X402_DAILY_LIMIT
           ? parseUsdcLimit(process.env.X402_DAILY_LIMIT)
           : DEFAULT_CAPS.dailyLimitAtomic,
+        killSwitch: process.env.X402_KILL_SWITCH === '1',
       },
       receipts,
     );
@@ -49,6 +53,15 @@ export class CapPolicy {
    * Returns `{ ok: true }` if allowed, otherwise an explanatory reason.
    */
   async check(amountAtomic: bigint): Promise<CapDecision> {
+    if (this.config.killSwitch) {
+      return {
+        ok: false,
+        reason:
+          'X402_KILL_SWITCH=1 — all payments are disabled. ' +
+          'Unset the env var and restart the gateway to resume.',
+        spentSoFarAtomic: 0n,
+      };
+    }
     if (amountAtomic <= 0n) {
       return {
         ok: false,
