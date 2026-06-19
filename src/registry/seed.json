@@ -1,5 +1,157 @@
 {
   "version": 1,
   "_note": "Curated seed registry of x402-priced APIs verified to return a valid 402 challenge on Base mainnet. CI runs verify-seed nightly to flag broken entries. Discovery in pay.discover federates this seed with external indexes (CDP Bazaar, agentic.market, x402watch, 402directory.com); the directory has been the de facto live source since the v0.5 cleanup of stale seeds. Add curated entries here only if they need to be available with X402_FEDERATION=off. To submit a community entry, list at https://402directory.com/submit instead.",
-  "entries": []
+  "entries": [
+    {
+      "id": "conc-exe-intel-macro",
+      "name": "Concierge — macro snapshot",
+      "description": "Macro desk JSON: SPX, VIX, DXY, Fear and Greed, Treasury yields. Raw-tier research for agents.",
+      "endpoint": "https://conc-exe.xyz/api/concierge-intel-macro",
+      "method": "POST",
+      "price_usdc": 0.02,
+      "price_atomic": 20000,
+      "chain": "solana",
+      "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+      "category": "finance",
+      "tags": [
+        "macro",
+        "spx",
+        "vix",
+        "dxy",
+        "fear-greed",
+        "treasury",
+        "research",
+        "crypto",
+        "agent"
+      ],
+      "example": "https://conc-exe.xyz/api/concierge-intel-macro",
+      "verified": true,
+      "verified_at": "2026-06-19"
+    },
+    {
+      "id": "conc-exe-intel-tvl",
+      "name": "Concierge — DeFi TVL",
+      "description": "Chain TVL snapshot and top protocols via DeFi Llama. Cheapest raw-tier intel route.",
+      "endpoint": "https://conc-exe.xyz/api/concierge-intel-tvl",
+      "method": "POST",
+      "price_usdc": 0.02,
+      "price_atomic": 20000,
+      "chain": "solana",
+      "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+      "category": "defi",
+      "tags": [
+        "tvl",
+        "defi",
+        "llama",
+        "protocols",
+        "chains",
+        "solana",
+        "ethereum",
+        "agent"
+      ],
+      "example": "https://conc-exe.xyz/api/concierge-intel-tvl",
+      "verified": true,
+      "verified_at": "2026-06-19"
+    },
+    {
+      "id": "conc-exe-intel-verdict",
+      "name": "Concierge — desk verdict",
+      "description": "Synthesis desk verdict (snipe, watch, follow, avoid, rebalance) with optional Lounge insider overlay.",
+      "endpoint": "https://conc-exe.xyz/api/concierge-intel-verdict",
+      "method": "POST",
+      "price_usdc": 0.1,
+      "price_atomic": 100000,
+      "chain": "solana",
+      "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+      "category": "finance",
+      "tags": [
+        "verdict",
+        "trading",
+        "defi",
+        "solana",
+        "synthesis",
+        "signals",
+        "agent",
+        "intel"
+      ],
+      "example": "https://conc-exe.xyz/api/concierge-intel-verdict",
+      "verified": true,
+      "verified_at": "2026-06-19"
+    },
+    {
+      "id": "conc-exe-intel-meteora",
+      "name": "Concierge — Meteora DLMM",
+      "description": "Meteora DLMM pool deep-dive with APY sort, pool hints, and risk flags on Solana.",
+      "endpoint": "https://conc-exe.xyz/api/concierge-intel-meteora",
+      "method": "POST",
+      "price_usdc": 0.1,
+      "price_atomic": 100000,
+      "chain": "solana",
+      "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+      "category": "defi",
+      "tags": [
+        "meteora",
+        "dlmm",
+        "yield",
+        "solana",
+        "defi",
+        "liquidity",
+        "apy",
+        "agent"
+      ],
+      "example": "https://conc-exe.xyz/api/concierge-intel-meteora",
+      "verified": true,
+      "verified_at": "2026-06-19"
+    },
+    {
+      "id": "conc-exe-intel-desk-brief",
+      "name": "Concierge — morning desk brief",
+      "description": "Bundled macro, Meteora, and verdict synthesis in one call. Highest signal tier bundle.",
+      "endpoint": "https://conc-exe.xyz/api/concierge-intel-desk-brief",
+      "method": "POST",
+      "price_usdc": 0.25,
+      "price_atomic": 250000,
+      "chain": "solana",
+      "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+      "category": "finance",
+      "tags": [
+        "brief",
+        "macro",
+        "meteora",
+        "verdict",
+        "bundle",
+        "desk",
+        "agent",
+        "research"
+      ],
+      "example": "https://conc-exe.xyz/api/concierge-intel-desk-brief",
+      "verified": true,
+      "verified_at": "2026-06-19"
+    },
+    {
+      "id": "conc-exe-concierge-chat",
+      "name": "Concierge — AI chat turn",
+      "description": "One Gemini or GLM Concierge turn — macro, geo, technicals, trading plans. HTML reply field.",
+      "endpoint": "https://conc-exe.xyz/api/concierge",
+      "method": "POST",
+      "price_usdc": 0.1,
+      "price_atomic": 100000,
+      "chain": "solana",
+      "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+      "category": "ai",
+      "tags": [
+        "concierge",
+        "chat",
+        "gemini",
+        "trading",
+        "macro",
+        "analysis",
+        "agent",
+        "llm"
+      ],
+      "example": "https://conc-exe.xyz/api/concierge",
+      "verified": true,
+      "verified_at": "2026-06-19"
+    }
+  ]
 }
