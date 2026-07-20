@@ -26,7 +26,7 @@
       ],
       "example": "https://conc-exe.xyz/api/concierge-intel-macro",
       "verified": true,
-      "verified_at": "2026-06-19"
+      "verified_at": "2026-07-20"
     },
     {
       "id": "conc-exe-intel-tvl",
@@ -51,7 +51,7 @@
       ],
       "example": "https://conc-exe.xyz/api/concierge-intel-tvl",
       "verified": true,
-      "verified_at": "2026-06-19"
+      "verified_at": "2026-07-20"
     },
     {
       "id": "conc-exe-intel-verdict",
@@ -76,7 +76,7 @@
       ],
       "example": "https://conc-exe.xyz/api/concierge-intel-verdict",
       "verified": true,
-      "verified_at": "2026-06-19"
+      "verified_at": "2026-07-20"
     },
     {
       "id": "conc-exe-intel-meteora",
@@ -101,7 +101,7 @@
       ],
       "example": "https://conc-exe.xyz/api/concierge-intel-meteora",
       "verified": true,
-      "verified_at": "2026-06-19"
+      "verified_at": "2026-07-20"
     },
     {
       "id": "conc-exe-intel-desk-brief",
@@ -126,7 +126,7 @@
       ],
       "example": "https://conc-exe.xyz/api/concierge-intel-desk-brief",
       "verified": true,
-      "verified_at": "2026-06-19"
+      "verified_at": "2026-07-20"
     },
     {
       "id": "conc-exe-concierge-chat",
@@ -151,7 +151,7 @@
       ],
       "example": "https://conc-exe.xyz/api/concierge",
       "verified": true,
-      "verified_at": "2026-06-19"
+      "verified_at": "2026-07-20"
     }
   ]
 }
