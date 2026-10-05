@@ -1,5 +1,22 @@
 {
   "version": 1,
   "_note": "Curated seed registry of x402-priced APIs verified to return a valid 402 challenge on Base mainnet. CI runs verify-seed nightly to flag broken entries. Discovery in pay.discover federates this seed with external indexes (CDP Bazaar, agentic.market, x402watch, 402directory.com); the directory has been the de facto live source since the v0.5 cleanup of stale seeds. Add curated entries here only if they need to be available with X402_FEDERATION=off. To submit a community entry, list at https://402directory.com/submit instead.",
-  "entries": []
+  "entries": [
+    {
+      "id": "synthetic-universe-weather",
+      "name": "Synthetic Universe — weather data",
+      "description": "Pay-per-call weather data API for AI agents on Base via x402 ($0.01 USDC per call); live catalog at https://pay.brianbooms.com/api/v1/catalog/query.",
+      "endpoint": "https://pay.brianbooms.com/api/v1/data/weather?lat=30.27&lon=-97.74",
+      "method": "GET",
+      "price_usdc": 0.01,
+      "price_atomic": 10000,
+      "chain": "base",
+      "network": "eip155:8453",
+      "category": "weather",
+      "tags": ["weather", "data"],
+      "example": "https://pay.brianbooms.com/api/v1/data/weather?lat=30.27&lon=-97.74",
+      "verified": false,
+      "verified_at": null
+    }
+  ]
 }
