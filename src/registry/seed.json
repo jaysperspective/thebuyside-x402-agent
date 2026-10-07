@@ -1,5 +1,33 @@
 {
   "version": 1,
   "_note": "Curated seed registry of x402-priced APIs verified to return a valid 402 challenge on Base mainnet. CI runs verify-seed nightly to flag broken entries. Discovery in pay.discover federates this seed with external indexes (CDP Bazaar, agentic.market, x402watch, 402directory.com); the directory has been the de facto live source since the v0.5 cleanup of stale seeds. Add curated entries here only if they need to be available with X402_FEDERATION=off. To submit a community entry, list at https://402directory.com/submit instead.",
-  "entries": []
+  "entries": [
+    {
+      "id": "x402-extract-article",
+      "name": "x402-extract — article extraction",
+      "description": "Fetches a URL and returns the extracted article as JSON: cleaned title, meta description, markdown, and plain text. Deterministic Readability-based extraction, no LLM.",
+      "endpoint": "https://completion-producers-conversion-reliability.trycloudflare.com/v1/extract",
+      "method": "GET",
+      "price_usdc": 0.005,
+      "price_atomic": 5000,
+      "chain": "base",
+      "network": "eip155:8453",
+      "protocol": "x402",
+      "category": "extraction",
+      "tags": [
+        "extract",
+        "article",
+        "readability",
+        "markdown",
+        "scraping",
+        "text",
+        "content",
+        "summarize"
+      ],
+      "example": "https://completion-producers-conversion-reliability.trycloudflare.com/v1/extract?url=https://example.com",
+      "verified": true,
+      "verified_at": "2026-10-07",
+      "source": "verified"
+    }
+  ]
 }
