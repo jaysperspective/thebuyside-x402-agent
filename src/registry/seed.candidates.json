@@ -13,7 +13,15 @@
       "chain": "base-sepolia",
       "network": "eip155:84532",
       "category": "github",
-      "tags": ["github", "gitlab", "repos", "ai", "article", "writeup", "sepolia"],
+      "tags": [
+        "github",
+        "gitlab",
+        "repos",
+        "ai",
+        "article",
+        "writeup",
+        "sepolia"
+      ],
       "example": "https://gitgazette.com/api/x402/article",
       "verified": false,
       "verified_at": "2026-05-10"
@@ -29,7 +37,13 @@
       "chain": "base-sepolia",
       "network": "eip155:84532",
       "category": "github",
-      "tags": ["github", "repos", "compare", "ai", "sepolia"],
+      "tags": [
+        "github",
+        "repos",
+        "compare",
+        "ai",
+        "sepolia"
+      ],
       "example": "https://gitgazette.com/api/x402/compare",
       "verified": false,
       "verified_at": "2026-05-10"
@@ -45,7 +59,14 @@
       "chain": "base-sepolia",
       "network": "eip155:84532",
       "category": "github",
-      "tags": ["github", "repos", "alternatives", "ai", "discovery", "sepolia"],
+      "tags": [
+        "github",
+        "repos",
+        "alternatives",
+        "ai",
+        "discovery",
+        "sepolia"
+      ],
       "example": "https://gitgazette.com/api/x402/alternatives",
       "verified": false,
       "verified_at": "2026-05-10"
@@ -62,10 +83,46 @@
       "network": "localnet",
       "protocol": "mpp",
       "category": "sandbox",
-      "tags": ["paysh", "mpp", "debugger", "sandbox", "test", "solana", "surfpool"],
+      "tags": [
+        "paysh",
+        "mpp",
+        "debugger",
+        "sandbox",
+        "test",
+        "solana",
+        "surfpool"
+      ],
       "example": "https://debugger.pay.sh/mpp/quote/AAPL",
       "verified": false,
       "verified_at": "2026-05-10"
+    },
+    {
+      "id": "hermes-micro-agent-summarize",
+      "name": "Hermes Micro-Agent — summarize",
+      "description": "Summarize text over HTTP 402 on Base. Standard x402 v2 exact: a signed USDC transferWithAuthorization (EIP-3009) in the PAYMENT-SIGNATURE header, verified and settled on Base before the task runs. Returns {summary, sentences, words, compression}.",
+      "endpoint": "https://hermesmicroservice.theworkpc.com/summarize",
+      "method": "POST",
+      "price_usdc": 0.01,
+      "price_atomic": 10000,
+      "chain": "base",
+      "network": "eip155:8453",
+      "protocol": "x402",
+      "category": "ai",
+      "tags": [
+        "summarize",
+        "text",
+        "ai",
+        "extractive",
+        "agents",
+        "llm",
+        "base",
+        "usdc",
+        "x402"
+      ],
+      "example": "https://hermesmicroservice.theworkpc.com/summarize",
+      "verified": false,
+      "verified_at": "2026-11-20",
+      "source": "candidate"
     }
   ]
 }
